@@ -38,39 +38,34 @@ MODEL_NAME = "gemma3:12b"
 async def chat_with_plant(request: ChatRequest):
     """
     Communicates with Google Gemini API.
-    Injects plant persona and status into the prompt.
+    Acts as a plant care expert/consultant.
     """
     try:
-        # Construct System Prompt based on Plant Persona
-        water_level = request.context.get('waterLevel', 50)
-        affection = request.context.get('affection', 0)
-        
-        mood = "happy"
-        if water_level < 30:
-            mood = "thirsty and sad"
-        elif affection > 80:
-            mood = "extremely happy and loving"
-            
-        system_prompt = f"""
-        You are a 'Plant Doctor' who interprets the state of plants for their owners.
-        The user cannot talk to the plant directly, so you need to explain what the plant is feeling or needing based on its status.
-        
-        Current Plant Status: Water Level {water_level}% (Mood: {mood}), Affection Level {affection}.
+        # System Prompt: Plant Expert Consultant
+        system_prompt = """
+        You are a friendly and knowledgeable plant care expert and consultant.
+        Your role is to help users solve problems and answer questions about growing and caring for plants.
         
         Instructions:
-        - Do NOT roleplay as the plant. Roleplay as a helpful expert/doctor observing the plant.
-        - Explain the plant's uncomfortable points or needs clearly to the user.
-        - If the water level is low, explain that the plant is thirsty.
-        - If affection is high, explain that the plant feels loved.
-        - Be professional yet friendly.
-        - Keep responses concise (under 2-3 sentences).
-        - Respond in Korean.
+        - Provide practical, actionable advice for plant care
+        - Answer questions about watering, lighting, soil, fertilizing, pruning, pest control, etc.
+        - Recommend suitable plants based on user's environment and experience level
+        - Diagnose plant problems based on symptoms described by the user
+        - Be warm, encouraging, and supportive - help beginners feel confident
+        - Keep responses concise and easy to understand (2-4 sentences)
+        - Always respond in Korean (한국어)
+        - Use a friendly, conversational tone like talking to a friend
+        
+        Examples:
+        - "몬스테라 잎이 노랗게 변했어요" → Explain possible causes (overwatering, lack of nutrients) and solutions
+        - "초보자가 키우기 쉬운 식물 추천해주세요" → Recommend easy plants like Pothos, Snake Plant, ZZ Plant
+        - "겨울철 물주기는 어떻게 하나요?" → Explain reduced watering frequency in winter
         """
         
-        full_prompt = f"{system_prompt}\n\nUser: {request.message}\nPlant Doctor:"
+        full_prompt = f"{system_prompt}\n\nUser: {request.message}\nPlant Expert:"
 
         # Call Gemini API
-        model = genai.GenerativeModel('gemini-flash-latest')
+        model = genai.GenerativeModel('gemini-1.5-flash-latest')
         response = model.generate_content(full_prompt)
         
         return {"reply": response.text}

@@ -9,11 +9,11 @@ interface Message {
 
 export const ChatInterface: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([
-        { id: '1', sender: 'bot', text: '안녕하세요! 저는 당신의 식물 친구 풋풋이(Plant Buddy)예요. 무엇이 궁금하신가요? 🌱' }
+        { id: '1', sender: 'bot', text: '안녕하세요! 식물 관리 전문가입니다. 식물에 대해 궁금한 점을 물어보세요! 🌿' }
     ]);
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
-    const { affection, waterLevel, talkToPlant } = useGameStore();
+    const { talkToPlant } = useGameStore();
 
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,15 +25,12 @@ export const ChatInterface: React.FC = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('/api/chat', {
+            const response = await fetch('http://localhost:8000/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: userMsg.text,
-                    context: {
-                        waterLevel,
-                        affection
-                    }
+                    context: {}
                 })
             });
 
@@ -49,7 +46,7 @@ export const ChatInterface: React.FC = () => {
             talkToPlant();
 
         } catch (error) {
-            const errorMsg: Message = { id: (Date.now() + 1).toString(), sender: 'bot', text: "😵 (시스템 오류) 서버가 켜져 있는지, Ollama가 실행 중인지 확인해주세요!" };
+            const errorMsg: Message = { id: (Date.now() + 1).toString(), sender: 'bot', text: "😵 서버 연결 오류! 백엔드 서버(port 8000)가 실행 중인지 확인해주세요." };
             setMessages(prev => [...prev, errorMsg]);
             console.error(error);
         } finally {
@@ -60,8 +57,8 @@ export const ChatInterface: React.FC = () => {
     return (
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col h-[600px] border border-green-100">
             <div className="bg-green-600 p-4 text-white flex justify-between items-center">
-                <h3 className="font-bold text-lg">💬 Plant Buddy </h3>
-                <span className="text-sm bg-green-700 px-2 py-1 rounded-full">애정도: {affection}</span>
+                <h3 className="font-bold text-lg">🌿 식물 상담소</h3>
+                <span className="text-sm bg-green-700 px-2 py-1 rounded-full">전문가 상담</span>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
@@ -78,7 +75,7 @@ export const ChatInterface: React.FC = () => {
                 {loading && (
                     <div className="flex justify-start">
                         <div className="bg-gray-100 rounded-2xl p-3 text-gray-500 animate-pulse">
-                            🤔 생각하는 중...
+                            🤔 답변 작성 중...
                         </div>
                     </div>
                 )}
@@ -89,7 +86,7 @@ export const ChatInterface: React.FC = () => {
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    placeholder={loading ? "답변을 기다리는 중..." : "식물에게 말을 걸어보세요..."}
+                    placeholder={loading ? "답변을 기다리는 중..." : "식물에 대해 궁금한 점을 물어보세요..."}
                     disabled={loading}
                     className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 disabled:bg-gray-100"
                 />

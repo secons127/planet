@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { PlantList } from './features/dictionary/PlantList';
 import { GameView } from './features/game/GameView';
 import { ChatInterface } from './features/chat/ChatInterface';
+import { JournalView } from './features/journal/JournalView';
 
-type View = 'Home' | 'Dictionary' | 'Game' | 'Chat';
+type View = 'Home' | 'Dictionary' | 'Game' | 'Journal' | 'Chat';
 
 function App() {
     const [currentView, setCurrentView] = useState<View>('Home');
@@ -14,6 +15,8 @@ function App() {
                 return <PlantList />;
             case 'Game':
                 return <GameView onNavigate={(view) => setCurrentView(view)} />;
+            case 'Journal':
+                return <JournalView />;
             case 'Chat':
                 return <ChatInterface />;
             default:
@@ -22,7 +25,7 @@ function App() {
                         <h1 className="text-4xl font-bold text-green-700 mb-4">🌿 내 손안의 작은 정원</h1>
                         <p className="text-xl text-gray-700 mb-8">우리만의 식물 키우기 여정이 곧 시작됩니다!</p>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full">
                             <div
                                 onClick={() => setCurrentView('Dictionary')}
                                 className="bg-white p-6 rounded-xl shadow-lg border border-green-100 cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1"
@@ -38,6 +41,14 @@ function App() {
                                 <div className="text-4xl mb-4">🌱</div>
                                 <h2 className="text-2xl font-bold mb-2">식물 키우기</h2>
                                 <p>물을 주고 사랑으로 키워보세요.</p>
+                            </div>
+                            <div
+                                onClick={() => setCurrentView('Journal')}
+                                className="bg-white p-6 rounded-xl shadow-lg border border-green-100 cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1"
+                            >
+                                <div className="text-4xl mb-4">📝</div>
+                                <h2 className="text-2xl font-bold mb-2">식물 일지</h2>
+                                <p>내 식물의 성장을 기록하세요.</p>
                             </div>
                             <div
                                 onClick={() => setCurrentView('Chat')}
@@ -64,6 +75,7 @@ function App() {
                     <div className="space-x-4">
                         <button onClick={() => setCurrentView('Dictionary')} className={`px-3 py-1 rounded ${currentView === 'Dictionary' ? 'bg-green-100 text-green-700' : 'text-gray-600'}`}>사전</button>
                         <button onClick={() => setCurrentView('Game')} className={`px-3 py-1 rounded ${currentView === 'Game' ? 'bg-green-100 text-green-700' : 'text-gray-600'}`}>키우기</button>
+                        <button onClick={() => setCurrentView('Journal')} className={`px-3 py-1 rounded ${currentView === 'Journal' ? 'bg-green-100 text-green-700' : 'text-gray-600'}`}>일지</button>
                         <button onClick={() => setCurrentView('Chat')} className={`px-3 py-1 rounded ${currentView === 'Chat' ? 'bg-green-100 text-green-700' : 'text-gray-600'}`}>상담소</button>
                     </div>
                 </div>

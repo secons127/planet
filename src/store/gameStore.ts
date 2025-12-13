@@ -91,21 +91,23 @@ export const useGameStore = create<GameState>((set, get) => ({
         return { exp: newExp };
     }),
 
-    waterPlant: () => set((state) => {
+    waterPlant: () => {
+        const state = useGameStore.getState();
         const newWaterLevel = Math.min(100, state.waterLevel + 30);
         let newSoil: SoilCondition = 'moist';
         if (newWaterLevel > 90) newSoil = 'wet'; // Overwatering risk
 
-        return {
+        useGameStore.setState({
             waterLevel: newWaterLevel,
             soilCondition: newSoil,
-            affection: Math.min(100, state.affection + 2),
-            exp: state.exp + 5 >= state.maxExp ? 0 : state.exp + 5
-        };
-    }),
+            affection: Math.min(100, state.affection + 2)
+        });
+        state.addExp(5);
+    },
 
-    fertilizePlant: () => set((state) => {
-        if (state.fertilizerCount <= 0) return {};
+    fertilizePlant: () => {
+        const state = useGameStore.getState();
+        if (state.fertilizerCount <= 0) return;
 
         // Logic: Cure status if sick, else Double XP
         let newHealth = state.healthCondition;
@@ -117,19 +119,22 @@ export const useGameStore = create<GameState>((set, get) => ({
             earnedExp = 60; // Double XP (Standard was 30)
         }
 
-        return {
+        useGameStore.setState({
             fertilizerCount: state.fertilizerCount - 1,
             healthCondition: newHealth,
             soilCondition: 'moist',
-            exp: state.exp + earnedExp >= state.maxExp ? 0 : state.exp + earnedExp,
             affection: Math.min(100, state.affection + 5)
-        };
-    }),
+        });
+        state.addExp(earnedExp);
+    },
 
-    talkToPlant: () => set((state) => ({
-        affection: Math.min(100, state.affection + 10),
-        exp: state.exp + 5 >= state.maxExp ? 0 : state.exp + 5
-    })),
+    talkToPlant: () => {
+        const state = useGameStore.getState();
+        useGameStore.setState({
+            affection: Math.min(100, state.affection + 10)
+        });
+        state.addExp(5);
+    },
 
     // Advanced Actions Impl
     inspect: () => {
@@ -163,16 +168,22 @@ export const useGameStore = create<GameState>((set, get) => ({
         return msg;
     },
 
-    prunePlant: () => set((state) => ({
-        hygiene: Math.min(100, state.hygiene + 20),
-        exp: state.exp + 15 >= state.maxExp ? 0 : state.exp + 15 // Pruning stimulates growth
-    })),
+    prunePlant: () => {
+        const state = useGameStore.getState();
+        useGameStore.setState({
+            hygiene: Math.min(100, state.hygiene + 20)
+        });
+        state.addExp(15); // Pruning stimulates growth
+    },
 
-    ventilate: () => set((state) => ({
-        ventilation: 100,
-        soilCondition: state.waterLevel > 80 ? 'moist' : state.soilCondition, // Helps dry out wet soil
-        exp: state.exp + 5 >= state.maxExp ? 0 : state.exp + 5
-    })),
+    ventilate: () => {
+        const state = useGameStore.getState();
+        useGameStore.setState({
+            ventilation: 100,
+            soilCondition: state.waterLevel > 80 ? 'moist' : state.soilCondition // Helps dry out wet soil
+        });
+        state.addExp(5);
+    },
 
     // Weather change logic triggered by tick or event
     changeWeather: () => set(() => {
