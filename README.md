@@ -318,38 +318,12 @@ planet/
 
 ---
 
-## 🤝 기여하기
-
-이 프로젝트는 오픈소스입니다. 기여를 환영합니다!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다.
-
----
-
 ## 👨‍💻 개발자
 
 **secons127**
 - GitHub: [@secons127](https://github.com/secons127)
 - Repository: [planet](https://github.com/secons127/planet)
 
----
-
-## 🙏 감사의 말
-
-- **Google Gemini**: AI 상담 기능 제공
-- **TailwindCSS**: 아름다운 UI 구현
-- **Zustand**: 간편한 상태 관리
-- **Lucide**: 깔끔한 아이콘 세트
 
 ---
 
