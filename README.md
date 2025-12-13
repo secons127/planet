@@ -1,8 +1,15 @@
 # 🌿 내 손안의 작은 정원 (Planet)
 
 > **AI 기반의 식물 키우기 시뮬레이션 & 식물 관리 웹 애플리케이션**
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/16e57c60-4c29-47e8-bfe4-2b1fdd912632" />
 
-🔗 GitHub: https://github.com/secons127/planet
+
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/607f2617-64bb-4d84-8e27-ae8d599b93ee" />
+
+
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/7d7d698d-2dd1-4eef-9136-8d4737ef7194" />
+
+
 
 ---
 
@@ -328,3 +335,4 @@ planet/
 ---
 
 **🌿 식물과 함께하는 행복한 하루 되세요!**
+
