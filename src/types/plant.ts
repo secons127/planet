@@ -8,6 +8,10 @@ export interface Plant {
     sunlight: string; // e.g., "Partial Shade"
     temperature: string; // e.g., "18-24°C"
     imageUrl: string;
+    // Dictionary details
+    origin?: string;
+    careGuide?: string;
+    botanicalFamily?: string;
     // Game stats
     baseHealth: number;
     growthRate: number;

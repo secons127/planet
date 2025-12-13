@@ -1,4 +1,4 @@
-# 🌿 내 손안의 작은 정원 (My Little Garden)
+# 🌿 내 손안의 작은 정원 (Planet)
 
 > **AI 기반의 식물 키우기 시뮬레이션 & 식물 사전 웹 애플리케이션**
 
@@ -69,6 +69,6 @@ npm run preview
 - **실시간 상태 관리**: 시간이 지남에 따라 수분이 감소하므로 주기적인 관리가 필요합니다.
 
 
-# 🌿 내 손안의 작은 정원 (My Little Garden)
+# 🌿 내 손안의 작은 정원 (Planet)
 
 🔗 GitHub: https://github.com/secons127/planet

@@ -59,7 +59,7 @@ function App() {
             <nav className="bg-white shadow-sm p-4 sticky top-0 z-10">
                 <div className="container mx-auto flex justify-between items-center">
                     <button onClick={() => setCurrentView('Home')} className="text-xl font-bold text-green-800">
-                        🌿 My Little Garden
+                        🌿 Planet
                     </button>
                     <div className="space-x-4">
                         <button onClick={() => setCurrentView('Dictionary')} className={`px-3 py-1 rounded ${currentView === 'Dictionary' ? 'bg-green-100 text-green-700' : 'text-gray-600'}`}>사전</button>

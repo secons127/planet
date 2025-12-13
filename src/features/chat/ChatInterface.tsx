@@ -60,7 +60,7 @@ export const ChatInterface: React.FC = () => {
     return (
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col h-[600px] border border-green-100">
             <div className="bg-green-600 p-4 text-white flex justify-between items-center">
-                <h3 className="font-bold text-lg">💬 Plant Buddy (Powered by Gemma 3)</h3>
+                <h3 className="font-bold text-lg">💬 Plant Buddy </h3>
                 <span className="text-sm bg-green-700 px-2 py-1 rounded-full">애정도: {affection}</span>
             </div>
 
@@ -68,8 +68,8 @@ export const ChatInterface: React.FC = () => {
                 {messages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[70%] rounded-2xl p-3 shadow-sm ${msg.sender === 'user'
-                                ? 'bg-green-500 text-white rounded-tr-none'
-                                : 'bg-white text-gray-800 border border-gray-200 rounded-tl-none'
+                            ? 'bg-green-500 text-white rounded-tr-none'
+                            : 'bg-white text-gray-800 border border-gray-200 rounded-tl-none'
                             }`}>
                             {msg.text}
                         </div>
