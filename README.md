@@ -1,5 +1,6 @@
 # 🌿 내 손안의 작은 정원 (Planet)
 > **Planet은 식물 키우기가 두려운 사람을 위한 AI 기반 식물 시뮬레이션 플랫폼입니다.**
+> **본 프로젝트는 antigravity, Ollama, gemini, gemma, chat GPT 등의 생성형 AI를 통한 바이브 코딩으로 제작된 프로젝트입니다.**
 >
 > 
 <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/16e57c60-4c29-47e8-bfe4-2b1fdd912632" />
@@ -336,5 +337,6 @@ planet/
 ---
 
 **🌿 식물과 함께하는 행복한 하루 되세요!**
+
 
 
